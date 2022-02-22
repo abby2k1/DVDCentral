@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[tblOrderItem]
+(
+	[ID] INT NOT NULL PRIMARY KEY,
+	[OrderID] INT NOT NULL,
+	[MovieID] INT NOT NULL,
+	[Quantity] INT NOT NULL,
+	[Cost] DECIMAL NOT NULL,
+	CONSTRAINT [FK_OrderItemOrderID] FOREIGN KEY (OrderID) REFERENCES tblOrder(ID),
+	CONSTRAINT [FK_OrderItemMovieID] FOREIGN KEY (MovieID) REFERENCES tblMovie(ID)
+)

@@ -56,5 +56,43 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="PreDeploy" />
+    <Folder Include="PostDeploy" />
+    <Folder Include="PostDeploy\DefaultData" />
+    <Folder Include="Tables" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\tblGenre.sql" />
+    <Build Include="Tables\tblMovieGenre.sql" />
+    <Build Include="Tables\tblMovie.sql" />
+    <Build Include="Tables\tblFormat.sql" />
+    <Build Include="Tables\tblDirector.sql" />
+    <Build Include="Tables\tblRating.sql" />
+    <Build Include="Tables\tblCustomer.sql" />
+    <Build Include="Tables\tblUser.sql" />
+    <Build Include="Tables\tblOrder.sql" />
+    <Build Include="Tables\tblOrderItem.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="AKT.DVDCentral.DB.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="PreDeploy\Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PostDeploy\DefaultData\Customers.sql" />
+    <None Include="PostDeploy\DefaultData\Directors.sql" />
+    <None Include="PostDeploy\DefaultData\Formats.sql" />
+    <None Include="PostDeploy\DefaultData\Genres.sql" />
+    <None Include="PostDeploy\DefaultData\Movies.sql" />
+    <None Include="PostDeploy\DefaultData\MoviesGenres.sql" />
+    <None Include="PostDeploy\DefaultData\Orders.sql" />
+    <None Include="PostDeploy\DefaultData\OrdersItems.sql" />
+    <None Include="PostDeploy\DefaultData\Ratings.sql" />
+    <None Include="PostDeploy\DefaultData\Users.sql" />
+    <None Include="local.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="PostDeploy\Script.PostDeployment.sql" />
   </ItemGroup>
 </Project>

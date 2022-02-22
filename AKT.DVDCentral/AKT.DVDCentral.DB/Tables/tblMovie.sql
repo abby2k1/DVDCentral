@@ -1,0 +1,15 @@
+﻿CREATE TABLE [dbo].[tblMovie]
+(
+	[ID] INT NOT NULL PRIMARY KEY,
+	[Title] NVARCHAR(255) NOT NULL,
+	[Description] NVARCHAR(MAX),
+	[Cost] DECIMAL NOT NULL,
+	[RatingID] INT NOT NULL,
+	[FormatID] INT NOT NULL,
+	[DirectorID] INT NOT NULL,
+	[InStkQty] INT NOT NULL,
+	[ImagePath] VARCHAR(250),
+	CONSTRAINT [FK_MovieRatingID] FOREIGN KEY (RatingID) REFERENCES tblRating(ID),
+	CONSTRAINT [FK_MovieFormatID] FOREIGN KEY (FormatID) REFERENCES tblFormat(ID),
+	CONSTRAINT [FK_MovieDirectorID] FOREIGN KEY (DirectorID) REFERENCES tblDirector(ID),
+)

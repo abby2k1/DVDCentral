@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[tblMovieGenre]
+(
+	[ID] INT NOT NULL PRIMARY KEY,
+	[MovieID] INT NOT NULL,
+	[GenreID] INT NOT NULL,
+	CONSTRAINT [FK_MovieGenreMovieID] FOREIGN KEY (MovieID) REFERENCES tblMovie(ID),
+	CONSTRAINT [FK_MovieGenreGenreID] FOREIGN KEY (GenreID) REFERENCES tblGenre(ID)
+)
