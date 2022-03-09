@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AKT.DVDCentral.BL.Models
+namespace AKT.DVDCentral.PL
 {
-    public class OrderItem
+    public partial class tblOrderItem
     {
         public int ID { get; set; }
         public int OrderID { get; set; }
         public int MovieID { get; set; }
         public int Quantity { get; set; }
         public decimal Cost { get; set; }
+
+        public virtual tblMovie Movie { get; set; } = null!;
+        public virtual tblOrder Order { get; set; } = null!;
     }
 }

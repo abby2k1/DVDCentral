@@ -4,7 +4,7 @@
 	[CustomerID] INT NOT NULL,
 	[OrderDate] DATETIME NOT NULL,
 	[UserID] INT NOT NULL,
-	[ShipDate] DATETIME,
+	[ShipDate] DATETIME NOT NULL,
 	CONSTRAINT [FK_OrderCustomerID] FOREIGN KEY (CustomerID) REFERENCES tblCustomer(ID),
 	CONSTRAINT [FK_OrderUserID] FOREIGN KEY (UserID) REFERENCES tblUser(ID)
 )

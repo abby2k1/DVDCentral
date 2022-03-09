@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AKT.DVDCentral.BL.Models
 {
-    internal class User
+    public class User
     {
         public int ID { get; set; }
         public string FirstName { get; set; }

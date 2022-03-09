@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AKT.DVDCentral.BL.Models
 {
-    internal class Format
+    public class Format
     {
         public int ID { get; set; }
         public string Description { get; set; }

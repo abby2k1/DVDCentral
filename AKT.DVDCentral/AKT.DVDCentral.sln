@@ -7,6 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AKT.DVDCentral.BL.Models", 
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AKT.DVDCentral.DB", "AKT.DVDCentral.DB\AKT.DVDCentral.DB.sqlproj", "{2F8AB6E5-C799-4151-A006-F6A48C8977EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AKT.DVDCentral.PL", "AKT.DVDCentral.PL\AKT.DVDCentral.PL.csproj", "{2E237802-313B-4AD2-A146-C71ED40CEE65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AKT.DVDCentral.BL", "AKT.DVDCentral.BL\AKT.DVDCentral.BL.csproj", "{C949A80D-C906-4707-B64F-BD38A465EDA0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AKT.DVDCentral.PL.Test", "AKT.DVDCentral.PL.Test\AKT.DVDCentral.PL.Test.csproj", "{202DFA8F-C6FE-4499-908A-5944226B8F1B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AKT.DVDCentral.BL.Test", "AKT.DVDCentral.BL.Test\AKT.DVDCentral.BL.Test.csproj", "{72C7F24A-8DE3-406D-A263-ECDB53A76631}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +31,22 @@ Global
 		{2F8AB6E5-C799-4151-A006-F6A48C8977EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F8AB6E5-C799-4151-A006-F6A48C8977EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F8AB6E5-C799-4151-A006-F6A48C8977EB}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{2E237802-313B-4AD2-A146-C71ED40CEE65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E237802-313B-4AD2-A146-C71ED40CEE65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E237802-313B-4AD2-A146-C71ED40CEE65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E237802-313B-4AD2-A146-C71ED40CEE65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C949A80D-C906-4707-B64F-BD38A465EDA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C949A80D-C906-4707-B64F-BD38A465EDA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C949A80D-C906-4707-B64F-BD38A465EDA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C949A80D-C906-4707-B64F-BD38A465EDA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{202DFA8F-C6FE-4499-908A-5944226B8F1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{202DFA8F-C6FE-4499-908A-5944226B8F1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{202DFA8F-C6FE-4499-908A-5944226B8F1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{202DFA8F-C6FE-4499-908A-5944226B8F1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72C7F24A-8DE3-406D-A263-ECDB53A76631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72C7F24A-8DE3-406D-A263-ECDB53A76631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72C7F24A-8DE3-406D-A263-ECDB53A76631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72C7F24A-8DE3-406D-A263-ECDB53A76631}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
