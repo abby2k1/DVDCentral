@@ -63,7 +63,7 @@ namespace AKT.DVDCentral.PL.Test
 
             if (existingRow != null)
             {
-                existingRow.MovieID = -99;
+                existingRow.MovieID = existingRow.MovieID + 1;
                 dc.SaveChanges();
             }
 

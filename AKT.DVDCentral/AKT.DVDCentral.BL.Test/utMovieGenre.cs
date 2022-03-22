@@ -16,8 +16,8 @@ namespace AKT.DVDCentral.BL.Test
         public void InsertTest()
         {
             MovieGenre movieGenre = new MovieGenre();
-            movieGenre.MovieID = 1;
-            movieGenre.GenreID = -99;
+            movieGenre.MovieID = 2;
+            movieGenre.GenreID = 2;
 
             int results = MovieGenreManager.Insert(movieGenre, true);
             Assert.AreEqual(1, results);
@@ -26,7 +26,7 @@ namespace AKT.DVDCentral.BL.Test
         [TestMethod()]
         public void UpdateTest()
         {
-            MovieGenre movieGenre = new MovieGenre() { ID = 1, MovieID = -1, GenreID = -1 };
+            MovieGenre movieGenre = new MovieGenre() { ID = 1, MovieID = 2, GenreID = 2 };
             int results = MovieGenreManager.Update(movieGenre, true);
             Assert.AreEqual(1, results);
         }

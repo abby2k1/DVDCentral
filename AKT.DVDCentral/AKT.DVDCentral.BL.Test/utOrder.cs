@@ -17,6 +17,7 @@ namespace AKT.DVDCentral.BL.Test
         {
             Order order = new Order();
             order.CustomerID = 1;
+            order.UserID = 1;
             order.OrderDate = DateTime.Now;
             order.ShipDate = DateTime.Now;
 
