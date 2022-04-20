@@ -127,6 +127,43 @@ namespace AKT.DVDCentral.BL
             }
         }
 
+        public static List<OrderItem> LoadByOrderID(int orderID)
+        {
+            try
+            {
+                List<OrderItem> rows = new List<OrderItem>();
+
+                DVDCentralEntities dc = new DVDCentralEntities();
+
+                var orderItems = (from oi in dc.tblOrderItems
+                              where oi.OrderID == orderID
+                              orderby oi.ID
+                              select new
+                              {
+                                  ID = oi.ID,
+                                  OrderID = oi.OrderID,
+                                  MovieID = oi.MovieID,
+                                  Quantity = oi.Quantity,
+                                  Cost = oi.Cost
+                              }).ToList();
+
+                orderItems.ForEach(oi => rows.Add(new Models.OrderItem
+                {
+                    ID = oi.ID,
+                    OrderID = oi.OrderID,
+                    MovieID = oi.MovieID,
+                    Quantity = oi.Quantity,
+                    Cost = oi.Cost
+                }));
+
+                return rows;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
         public static OrderItem LoadByID(int id)
         {
             try

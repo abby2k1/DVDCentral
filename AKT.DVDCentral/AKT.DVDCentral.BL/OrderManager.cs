@@ -6,7 +6,7 @@ namespace AKT.DVDCentral.BL
 {
     public static class OrderManager
     {
-        public static int Insert(Order order, bool rollback = false)
+        public static int Insert(Order order, bool rollback = false )
         {
             try
             {
@@ -24,14 +24,29 @@ namespace AKT.DVDCentral.BL
                     row.UserID = order.UserID;
                     row.OrderDate = order.OrderDate;
                     row.ShipDate = order.ShipDate;
-                    
+                    order.ID = row.ID;
+
                     dc.tblOrders.Add(row);
 
+                    if (order.OrderItems != null)
+                    {
+                        foreach (OrderItem oi in order.OrderItems)
+                        {
+                            oi.OrderID = row.ID;
+                            tblOrderItem item = new tblOrderItem();
+                            item.ID = dc.tblOrderItems.Any() ? dc.tblOrderItems.Max(dt => dt.ID) + 1 : 1;
+                            item.OrderID = oi.OrderID;
+                            item.MovieID = oi.MovieID;
+                            item.Cost = oi.Cost;
+                            item.Quantity = oi.Quantity;
+                            oi.ID = item.ID;
+                            dc.tblOrderItems.Add(item);
+                        }
+                    }
+                    
                     results = dc.SaveChanges();
-
+                    
                     if (rollback) transaction.Rollback();
-
-                    order.ID = row.ID;
 
                     return results;
                 }
@@ -109,7 +124,12 @@ namespace AKT.DVDCentral.BL
             }
         }
 
-        public static List<Order> Load()
+        public static List<Order> LoadByCustomerID(int id)
+        {
+            return Load(id);
+        }
+
+        public static List<Order> Load(int? customerID = null)
         {
             try
             {
@@ -117,21 +137,32 @@ namespace AKT.DVDCentral.BL
 
                 DVDCentralEntities dc = new DVDCentralEntities();
 
-                dc.tblOrders
-                    .ToList()
-                    .ForEach(dt => rows.Add(new Order
-                    {
-                        ID = dt.ID,
-                        CustomerID = dt.CustomerID,
-                        UserID = dt.UserID,
-                        OrderDate = dt.OrderDate,
-                        ShipDate = dt.ShipDate
-            }));
+                var orders = (from o in dc.tblOrders
+                              where o.CustomerID == customerID || customerID == null
+                              orderby o.ID
+                              select new
+                              {
+                                  ID = o.ID,
+                                  CustomerID = o.CustomerID,
+                                  UserID = o.UserID,
+                                  OrderDate = o.OrderDate,
+                                  ShipDate = o.ShipDate
+                              }).ToList();
+
+                orders.ForEach(o => rows.Add(new Models.Order
+                {
+                    ID = o.ID,
+                    CustomerID = o.CustomerID,
+                    UserID = o.UserID,
+                    OrderDate = o.OrderDate,
+                    ShipDate = o.ShipDate
+                }));
+
                 return rows;
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw e;
+                throw ex;
             }
         }
 

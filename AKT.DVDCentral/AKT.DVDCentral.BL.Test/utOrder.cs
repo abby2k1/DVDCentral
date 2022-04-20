@@ -53,5 +53,33 @@ namespace AKT.DVDCentral.BL.Test
         {
             Assert.AreEqual(3, OrderManager.LoadByID(3).ID);
         }
+
+        [TestMethod()]
+        public void InsertOrderOrderItemTest()
+        {
+            Order order = new Order();
+            order.CustomerID = 1;
+            order.UserID = 1;
+            order.OrderDate = DateTime.Now;
+            order.ShipDate = DateTime.Now;
+            order.OrderItems = new List<OrderItem>();
+
+            OrderItem orderItem = new OrderItem();
+            orderItem.OrderID = 1;
+            orderItem.MovieID = 1;
+            orderItem.Cost = 1m;
+            orderItem.Quantity = 1;
+
+            order.OrderItems.Add(orderItem);
+
+            int results = OrderManager.Insert(order, true);
+            Assert.AreEqual(2, results);
+        }
+
+        [TestMethod()]
+        public void LoadByCustomerIDTest()
+        {
+            Assert.AreEqual(1, OrderManager.LoadByCustomerID(1).Count);
+        }
     }
 }

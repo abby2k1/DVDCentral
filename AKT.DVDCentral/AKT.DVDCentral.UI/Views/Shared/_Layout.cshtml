@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AKT.DVDCentral.UI</a>
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">AKT.DVDCentral.UI</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,25 +20,58 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Movie" asp-action="Index">Movies</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Rating" asp-action="Index">Ratings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Format" asp-action="Index">Formats</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Director" asp-action="Index">Directors</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Genre" asp-action="Index">Genres</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar rounded-top">
+                <div class="header rounded-top">
+                    <h4>Movies - Filter by Genre</h4>
+                </div>
+                <div>
+                    @await Component.InvokeAsync("Sidebar")
+                </div>
+            </div>
+
+            <div id="overlay" onclick="off()">
+                <div id="imagepropbig">
+                    <img class="imagepropbig" id="output" />
+                </div>
+            </div>
+
+            <div class="col-md-9 main body-content rounded-top">
+                <div class="header rounded-top">
+                    <h4>@ViewBag.Title</h4>
+                </div>
+                <main role="main" class="pb-3">
+                    <div class="text-danger">@ViewBag.Error</div>
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - AKT.DVDCentral.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - AKT.DVDCentral.UI
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

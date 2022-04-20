@@ -13,6 +13,6 @@ namespace AKT.DVDCentral.BL.Models
         public DateTime OrderDate { get; set; }
         public int UserID { get; set; }
         public DateTime ShipDate { get; set; }
-        public List<OrderItem> OrderItems { get; set; }
+        public List<OrderItem>? OrderItems { get; set; }
     }
 }

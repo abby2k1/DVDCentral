@@ -124,36 +124,135 @@ namespace AKT.DVDCentral.BL
             }
         }
 
-        #region "Region"
-        #endregion
-
-        public static List<Movie> Load()
+        public static List<Movie> LoadByGenreID(int id)
         {
-            try
+            return Load(id);
+        }
+
+            public static List<Movie> Load(int? genreID = null)
+        {
+            if (genreID == null)
             {
-                List<Movie> rows = new List<Movie>();
+                try
+                {
+                    List<Movie> rows = new List<Movie>();
 
-                DVDCentralEntities dc = new DVDCentralEntities();
+                    DVDCentralEntities dc = new DVDCentralEntities();
 
-                dc.tblMovies
-                    .ToList()
-                    .ForEach(dt => rows.Add(new Movie
+                    var movies = (from m in dc.tblMovies
+                                  join r in dc.tblRatings on m.RatingID equals r.ID
+                                  join f in dc.tblFormats on m.FormatID equals f.ID
+                                  join d in dc.tblDirectors on m.DirectorID equals d.ID
+                                  select new
+                                  {
+                                      MovieID = m.ID,
+                                      MovieTitle = m.Title,
+                                      MovieDescription = m.Description,
+                                      MovieCost = m.Cost,
+                                      RatingID = r.ID,
+                                      FormatID = f.ID,
+                                      DirectorID = d.ID,
+                                      MovieInStkQty = m.InStkQty,
+                                      MovieImagePath = m.ImagePath,
+                                      RatingDesc = r.Description,
+                                      FormatDesc = f.Description,
+                                      d.FirstName,
+                                      d.LastName
+                                  }).ToList();
+
+                    movies.ForEach(m => rows.Add(new Models.Movie
                     {
-                        ID = dt.ID,
-                        Title = dt.Title,
-                        Description = dt.Description,
-                        Cost = dt.Cost,
-                        RatingID = dt.RatingID,
-                        FormatID = dt.FormatID,
-                        DirectorID = dt.DirectorID,
-                        InStkQty = dt.InStkQty,
-                        ImagePath = dt.ImagePath
+                        ID = m.MovieID,
+                        Title = m.MovieTitle,
+                        Description = m.MovieDescription,
+                        Cost = m.MovieCost,
+                        RatingID = m.RatingID,
+                        FormatID = m.FormatID,
+                        DirectorID = m.DirectorID,
+                        InStkQty = m.MovieInStkQty,
+                        ImagePath = m.MovieImagePath,
+                        RatingDesc = m.RatingDesc,
+                        FormatDesc = m.FormatDesc,
+                        DirectorName = m.FirstName + " " + m.LastName
                     }));
-                return rows;
+
+                    return rows;
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
             }
-            catch (Exception e)
+            else
             {
-                throw e;
+                try
+                {
+                    List<Movie> rows = new List<Movie>();
+
+                    DVDCentralEntities dc = new DVDCentralEntities();
+
+                    var movies = (from mg in dc.tblMovieGenres
+                                  join m in dc.tblMovies on mg.MovieID equals m.ID
+                                  join r in dc.tblRatings on m.RatingID equals r.ID
+                                  join f in dc.tblFormats on m.FormatID equals f.ID
+                                  join d in dc.tblDirectors on m.DirectorID equals d.ID
+                                  where mg.GenreID == genreID || genreID == null
+                                  orderby m.ID
+                                  select new
+                                  {
+                                      MovieID = m.ID,
+                                      MovieTitle = m.Title,
+                                      MovieDescription = m.Description,
+                                      MovieCost = m.Cost,
+                                      RatingID = r.ID,
+                                      FormatID = f.ID,
+                                      DirectorID = d.ID,
+                                      MovieInStkQty = m.InStkQty,
+                                      MovieImagePath = m.ImagePath,
+                                      RatingDesc = r.Description,
+                                      FormatDesc = f.Description,
+                                      d.FirstName,
+                                      d.LastName
+                                  }).ToList();
+
+                    movies.ForEach(m => rows.Add(new Models.Movie
+                    {
+                        ID = m.MovieID,
+                        Title = m.MovieTitle,
+                        Description = m.MovieDescription,
+                        Cost = m.MovieCost,
+                        RatingID = m.RatingID,
+                        FormatID = m.FormatID,
+                        DirectorID = m.DirectorID,
+                        InStkQty = m.MovieInStkQty,
+                        ImagePath = m.MovieImagePath,
+                        RatingDesc = m.RatingDesc,
+                        FormatDesc = m.FormatDesc,
+                        DirectorName = m.FirstName + " " + m.LastName
+                    }));
+
+                    return rows;
+
+                    /*dc.tblMovies
+                        .ToList()
+                        .ForEach(dt => rows.Add(new Movie
+                        {
+                            ID = dt.ID,
+                            Title = dt.Title,
+                            Description = dt.Description,
+                            Cost = dt.Cost,
+                            RatingID = dt.RatingID,
+                            FormatID = dt.FormatID,
+                            DirectorID = dt.DirectorID,
+                            InStkQty = dt.InStkQty,
+                            ImagePath = dt.ImagePath
+                        }));
+                    return rows;*/
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
             }
         }
 
@@ -163,15 +262,52 @@ namespace AKT.DVDCentral.BL
             {
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblMovie row = dc.tblMovies.FirstOrDefault(dt => dt.ID == id);
+                    var row = (from m in dc.tblMovies
+                               join r in dc.tblRatings on m.RatingID equals r.ID
+                               join f in dc.tblFormats on m.FormatID equals f.ID
+                               join d in dc.tblDirectors on m.DirectorID equals d.ID
+                               where m.ID == id
+                               orderby m.Title
+                               select new
+                               {
+                                   MovieID = m.ID,
+                                   MovieTitle = m.Title,
+                                   MovieDescription = m.Description,
+                                   MovieCost = m.Cost,
+                                   RatingID = r.ID,
+                                   FormatID = f.ID,
+                                   DirectorID = d.ID,
+                                   MovieInStkQty = m.InStkQty,
+                                   MovieImagePath = m.ImagePath,
+                                   RatingDesc = r.Description,
+                                   FormatDesc = f.Description,
+                                   d.FirstName,
+                                   d.LastName
+                               }).FirstOrDefault();
+
+                    //tblMovie row = dc.tblMovies.FirstOrDefault(dt => dt.ID == id);
 
                     if (row != null)
                     {
-                        return new Movie { ID = row.ID, Title = row.Title, Description = row.Description, Cost = row.Cost, RatingID = row.RatingID, FormatID = row.FormatID, DirectorID = row.DirectorID, InStkQty = row.InStkQty, ImagePath = row.ImagePath };
+                        return new Movie //{ ID = row.ID, Title = row.Title, Description = row.Description, Cost = row.Cost, RatingID = row.RatingID, FormatID = row.FormatID, DirectorID = row.DirectorID, InStkQty = row.InStkQty, ImagePath = row.ImagePath };
+                        {
+                            ID = row.MovieID,
+                            Title = row.MovieTitle,
+                            Description = row.MovieDescription,
+                            Cost = row.MovieCost,
+                            RatingID = row.RatingID,
+                            FormatID = row.FormatID,
+                            DirectorID = row.DirectorID,
+                            InStkQty = row.MovieInStkQty,
+                            ImagePath = row.MovieImagePath,
+                            RatingDesc = row.RatingDesc,
+                            FormatDesc = row.FormatDesc,
+                            DirectorName = row.FirstName + " " + row.LastName
+                        };
                     }
                     else
                     {
-                        throw new Exception("Row was not found.");
+                        throw new Exception("Movie was not found.");
                     }
                 }
             }

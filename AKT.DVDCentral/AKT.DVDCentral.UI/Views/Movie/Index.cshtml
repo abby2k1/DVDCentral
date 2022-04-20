@@ -1,0 +1,63 @@
+﻿@model IEnumerable<AKT.DVDCentral.BL.Models.Movie>
+
+@{
+    ViewData["Title"] = "Movies";
+}
+
+<h1>Movies</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InStkQty)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RatingDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormatDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DirectorName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InStkQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RatingDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormatDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DirectorName)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

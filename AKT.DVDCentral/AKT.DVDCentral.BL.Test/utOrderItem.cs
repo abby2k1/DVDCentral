@@ -53,5 +53,11 @@ namespace AKT.DVDCentral.BL.Test
         {
             Assert.AreEqual(3, OrderItemManager.LoadByID(3).ID);
         }
+
+        [TestMethod()]
+        public void LoadByOrderIDTest()
+        {
+            Assert.AreEqual(1, OrderItemManager.LoadByOrderID(1).Count);
+        }
     }
 }
