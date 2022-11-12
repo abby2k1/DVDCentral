@@ -8,6 +8,5 @@
 	[State] NVARCHAR(255),
 	[Zip] NVARCHAR(10),
 	[Phone] NVARCHAR(255),
-	[UserID] INT NOT NULL,
-	CONSTRAINT [FK_CustomerUserID] FOREIGN KEY (UserID) REFERENCES tblUser(ID)
+	[UserID] INT NOT NULL
 )

@@ -12,7 +12,7 @@ namespace AKT.DVDCentral.UI.Controllers
         {
             return View(MovieManager.Load());
         }
-        public ActionResult GenreFilter(int id)
+        public ActionResult View(int id)
         {
             ViewBag.GenreDesc = GenreManager.LoadByID(id).Description;
             return View(MovieManager.LoadByGenreID(id));

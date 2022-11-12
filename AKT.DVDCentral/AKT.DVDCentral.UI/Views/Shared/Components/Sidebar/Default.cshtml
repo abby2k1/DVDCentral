@@ -5,10 +5,16 @@
     {
         <li>
             <a asp-controller="Movie"
-               asp-action="GenreFilter"
+               asp-action="View"
                asp-route-id="@genre.ID">
                @genre.Description
             </a>
         </li>
     }
+    <li>
+        <a asp-controller="Movie"
+           asp-action="Index">
+           All
+        </a>
+    </li>
 </ul>
